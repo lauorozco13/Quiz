@@ -1,0 +1,38 @@
+#Punto 1
+
+CREATE BIGFILE TABLESPACE big_tbs_lau_orozco
+    DATAFILE 'big.dbf' SIZE 1Gb;
+
+#Punto 2
+
+create tablespace quiz3 datafile
+'datafilescc1.dbf' size 200M
+REUSE AUTOEXTEND 
+ON NEXT 600M MAXSIZE 1000M,
+'datafilescc2.dbf' size 200M
+REUSE AUTOEXTEND 
+ON NEXT 600M MAXSIZE 1000M,
+'datafilescc3.dbf' size 200M
+REUSE AUTOEXTEND 
+ON NEXT 600M MAXSIZE 1000M;
+
+#Punto 3
+
+CREATE PROFILE testProfile LIMIT 
+SESSIONS_PER_USER          UNLIMITED
+CPU_PER_SESSION            UNLIMITED
+IDLE_TIME                  15
+FAILED_LOGIN_ATTEMPTS      UNLIMITED;
+
+#Punto 4
+
+create user DBAuser
+identified by dba123
+default tablespace quiz3
+PROFILE testProfile;
+
+#Punto 5
+
+Create role conectarse;
+grant connect, resource to conectarse;
+grant conectarse to DBAuser;
